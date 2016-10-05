@@ -14,15 +14,12 @@ RUN apt-get update && \
 
 
 RUN apt-get clean && apt-get -yq autoclean && apt-get -yq autoremove && \
-    rm -rf rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/locale /usr/share/doc /usr/share/man
 
 RUN sudo useradd docker --shell /bin/bash --create-home \
   && sudo usermod -a -G sudo docker \
   && echo 'ALL ALL = (ALL) NOPASSWD: ALL' >> /etc/sudoers \
   && echo 'docker:secret' | chpasswd
-
-ADD docker/install-composer.sh /install-composer.sh
-RUN sudo chmod +x /install-composer.sh && /install-composer.sh && rm /install-composer.sh
 
 RUN sed -i "s/;date.timezone =/date.timezone = Europe\/Paris/" /etc/php/7.0/cli/php.ini && \
     sed -i "s/;date.timezone =/date.timezone = Europe\/Paris/" /etc/php/7.0//apache2/php.ini && \
@@ -36,9 +33,11 @@ RUN sed -i "s/export APACHE_RUN_USER=www-data/export APACHE_RUN_USER=docker/" /e
     sed -i "s/export APACHE_RUN_GROUP=www-data/export APACHE_RUN_GROUP=docker/" /etc/apache2/envvars && \
     chown -R docker: /var/lock/apache2
 
-EXPOSE 80 22 3306
+EXPOSE 80 3306
 
 ADD docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 USER docker
 WORKDIR /home/docker/
+
+

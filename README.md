@@ -1,4 +1,4 @@
-# Apache and PHP on Docker
+# Debian 8, Apache and PHP 7 on Docker
 
 __This image is not intended to be run AS IS but is rather to be used for building akeneo pim docker images__
 
