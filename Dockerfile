@@ -3,7 +3,7 @@ MAINTAINER Ronan Guilloux <ronan.guilloux@gmail.com>
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update && \
     apt-get -yq install \
-        sudo curl supervisor wget
+        sudo curl supervisor wget zip imagemagick
 RUN echo "deb http://packages.dotdeb.org jessie all" > /etc/apt/sources.list.d/dotdeb.list
 RUN wget https://www.dotdeb.org/dotdeb.gpg && apt-key add dotdeb.gpg
 RUN apt-get update && \
