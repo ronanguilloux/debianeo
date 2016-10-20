@@ -9,7 +9,7 @@ RUN wget https://www.dotdeb.org/dotdeb.gpg && apt-key add dotdeb.gpg
 RUN apt-get update && \
     apt-get -yq install --no-install-recommends \
         mysql-server apache2 libapache2-mod-php7.0 php7.0 php7.0-cli \
-        php7.0-xml php7.0-zip php7.0-curl php7.0-mongo php7.0-intl php7.0-mbstring
+        php7.0-xml php7.0-zip php7.0-curl php7.0-mongo php7.0-intl php7.0-mbstring \
         php7.0-mysql php7.0-gd php7.0-imagick php7.0-mcrypt php7.0-cli php7.0-apcu
 
 RUN a2dismod mpm_event && \
