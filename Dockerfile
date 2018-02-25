@@ -4,8 +4,9 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update && \
     apt-get -yq install \
         sudo curl supervisor wget zip imagemagick
-RUN echo "deb http://packages.dotdeb.org jessie all" > /etc/apt/sources.list.d/dotdeb.list
-RUN wget https://www.dotdeb.org/dotdeb.gpg && apt-key add dotdeb.gpg
+RUN apt-get install apt-transport-https lsb-release ca-certificates && \
+    wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg && \
+    echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list
 RUN apt-get update && \
     apt-get -yq install --no-install-recommends \
         mysql-server apache2 libapache2-mod-php7.0 php7.0 php7.0-cli \
